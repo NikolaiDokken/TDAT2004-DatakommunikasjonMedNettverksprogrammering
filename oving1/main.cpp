@@ -1,26 +1,28 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include <bits/stdc++.h>
+#include <list>
+#include <math.h>       /* sqrt */
 
 
 using namespace std;
 
-// To enable threading runtime checks, change the set()-line in CMakeLists.txt to:
-// set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread -pthread -std=c++1y -Wall -Wextra")
 int main() {
-  int amtThreads = 10;
+  int amtThreads = 7 ;
   int startInterval = 0;
-  int endInterval = 50;
+  int endInterval = 100;
 
   vector<thread> threads;
-  vector<int> primes = vector<int>();
-  if(startInterval < 2) startInterval = 2;
+  list<int> primes;
+  if(startInterval < 2) {
+    startInterval = 2;
+  }
   int interval = (endInterval - startInterval) / amtThreads;
   for (int i = 0; i < amtThreads; i++) {
     threads.emplace_back([i, interval, amtThreads, startInterval, endInterval, &primes] {
       // Thread work
-      // vector<int> threadPrimes = (vector <int>)primes;
+      list<int> tempPrimes;
+      list<int>::iterator it2 = tempPrimes.begin();
       int low = startInterval + i*interval;
       int high = startInterval + i*interval + interval;
       if (i == amtThreads-1) {
@@ -29,24 +31,25 @@ int main() {
       int flag;
       while (low < high) {
         flag = 0;
-        for(int i = 2; i <= low/2; ++i) {
+        for(int i = 2; i <= sqrt(low); ++i) {
           if (low % i == 0) {
             flag = 1;
             break;
           }
         }
         if (flag == 0) {
-          primes.push_back(low);
+          tempPrimes.insert(it2, low);
         }
         ++low;
       }
+      primes.splice(primes.end(), tempPrimes);
     });
   }
 
   for (auto &thread : threads) {
     thread.join();
   }
-  sort(primes.begin(), primes.end());
+  primes.sort();
   for (int prime : primes) {
     cout << to_string(prime) + " ";
   }
