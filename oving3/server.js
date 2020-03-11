@@ -22,19 +22,13 @@ app.post("/java", (req, res) => {
     console.log("The file was saved!");
   });
   exec(
-    "sudo docker build -t java_compiler docker_java/.",
+    "docker build -t java_compiler docker_java/.",
     (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
         res.status(400);
         res.json({
           output: stdout
-            .split("Step 4/5 : RUN javac code.java")[1]
-            .substring(
-              49,
-              stdout.split("Step 4/5 : RUN javac code.java")[1].length - 21
-            )
-            .replace("[0m[91m", "")
         });
         return;
       }
@@ -45,7 +39,7 @@ app.post("/java", (req, res) => {
         return;
       }
       console.log(`stdout: ${stdout}`);
-      exec("sudo docker run java_compiler", (error, stdout, stderr) => {
+      exec("docker run java_compiler", (error, stdout, stderr) => {
         if (error) {
           console.log(`error: ${error.message}`);
           res.status(400);
