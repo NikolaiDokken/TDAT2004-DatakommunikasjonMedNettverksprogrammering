@@ -56,7 +56,6 @@ public class KontoDAO {
             Konto temp = manager.find(Konto.class, kontonr);
             manager.remove(temp);
             manager.getTransaction().commit();
-
         } finally {
             closeEntityManager(manager);
         }
@@ -144,6 +143,18 @@ public class KontoDAO {
         try {
             manager.getTransaction().begin();
             manager.merge(konto);
+            manager.getTransaction().commit();
+        } finally {
+            closeEntityManager(manager);
+        }
+    }
+
+    public void deleteKontoLocked(int kontonr) {
+        EntityManager manager = getEntityManager();
+        try {
+            manager.getTransaction().begin();
+            KontoLocked temp = manager.find(KontoLocked.class, kontonr);
+            manager.remove(temp);
             manager.getTransaction().commit();
         } finally {
             closeEntityManager(manager);

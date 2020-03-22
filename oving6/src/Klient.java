@@ -5,13 +5,15 @@ public class Klient {
 
     public static void main(String[] args) throws Exception {
         oppgave2();
-        // oppgave3();
-        // oppgave4();
+        oppgave3();
+        oppgave4();
+        cleanUp();
     }
 
     public static void oppgave2() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
         KontoDAO dao = new KontoDAO(entityManagerFactory);
+        System.out.println("Oppgave 2");
 
         // Opprett to kontoer og lagre til databasen
         Konto konto1 = new Konto();
@@ -38,14 +40,13 @@ public class Klient {
         // Endre eier paa en konto og oppdater databasen
         konto2.setEier("Ny Studass");
         dao.oppdaterKonto(konto2);
-        // dao.deleteKonto(1);
-        // dao.deleteKonto(2);
 
     }
 
     public static void oppgave3() throws Exception {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
         KontoDAO dao = new KontoDAO(entityManagerFactory);
+        System.out.println("\nOppgave 3");
 
         Thread thread = new Thread(() -> {
             dao.overfor(1, 2, 100);
@@ -70,6 +71,7 @@ public class Klient {
     public static void oppgave4() throws Exception {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
         KontoDAO dao = new KontoDAO(entityManagerFactory);
+        System.out.println("\nOppgave 4");
 
         KontoLocked konto1 = new KontoLocked();
         konto1.setKontonr(3);
@@ -101,5 +103,16 @@ public class Klient {
         konto = dao.getKontoLocked(4);
         konto.setSaldo(500);
         dao.oppdaterKontoLocked(konto);
+    }
+
+    public static void cleanUp() {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
+        KontoDAO dao = new KontoDAO(entityManagerFactory);
+
+        dao.deleteKonto(1);
+        dao.deleteKonto(2);
+        dao.deleteKontoLocked(3);
+        dao.deleteKontoLocked(4);
+
     }
 }
