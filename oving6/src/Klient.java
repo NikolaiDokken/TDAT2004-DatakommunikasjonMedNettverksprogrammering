@@ -5,8 +5,8 @@ public class Klient {
 
     public static void main(String[] args) throws Exception {
         oppgave2();
-        // oppgave3();
-        // oppgave4();
+        oppgave3();
+        oppgave4();
     }
 
     public static void oppgave2() {
@@ -44,57 +44,61 @@ public class Klient {
     }
 
     public static void oppgave3() throws Exception {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Oving6");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
         KontoDAO dao = new KontoDAO(entityManagerFactory);
 
         Thread thread = new Thread(() -> {
-            dao.overfor(1234, 2521, 100);
+            dao.overfor(1, 2, 100);
         });
         thread.start();
-        dao.overfor(1234, 2521, 100);
+        dao.overfor(1, 2, 100);
         thread.join();
 
-        System.out.println("Forventet: Konto 1234, saldo 800. Konto 2521, saldo 700");
-        System.out.println(dao.getKonto(1234));
-        System.out.println(dao.getKonto(2521));
+        System.out.println("Forventet: Konto 1, saldo 800. Konto 2, saldo 700");
+        System.out.println(dao.getKonto(1));
+        System.out.println(dao.getKonto(2));
 
         // Tilbakestill saldoene
-        Konto konto = dao.getKonto(1234);
+        Konto konto = dao.getKonto(1);
         konto.setSaldo(1000);
         dao.oppdaterKonto(konto);
-        konto = dao.getKonto(2521);
+        konto = dao.getKonto(2);
         konto.setSaldo(500);
         dao.oppdaterKonto(konto);
     }
 
     public static void oppgave4() throws Exception {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Oving6");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
         KontoDAO dao = new KontoDAO(entityManagerFactory);
 
-        /*
-         * KontoLocked konto1 = new KontoLocked(); konto1.setKontonr(7777);
-         * konto1.setEier("Ian"); konto1.setSaldo(1000); dao.lagreNyKontoLocked(konto1);
-         * KontoLocked konto2 = new KontoLocked(); konto2.setKontonr(8888);
-         * konto2.setEier("Studass"); konto2.setSaldo(500);
-         * dao.lagreNyKontoLocked(konto2);
-         */
+        KontoLocked konto1 = new KontoLocked();
+        konto1.setKontonr(3);
+        konto1.setEier("Niko 2");
+        konto1.setSaldo(1000);
+        dao.lagreNyKontoLocked(konto1);
+
+        KontoLocked konto2 = new KontoLocked();
+        konto2.setKontonr(4);
+        konto2.setEier("Studass 3");
+        konto2.setSaldo(500);
+        dao.lagreNyKontoLocked(konto2);
 
         Thread thread = new Thread(() -> {
-            dao.overforLocked(7777, 8888, 100);
+            dao.overforLocked(3, 4, 100);
         });
         thread.start();
-        dao.overforLocked(7777, 8888, 100);
+        dao.overforLocked(3, 4, 100);
         thread.join();
 
-        System.out.println("Forventet: Konto 7777, saldo 800. Konto 8888, saldo 700");
-        System.out.println(dao.getKontoLocked(7777));
-        System.out.println(dao.getKontoLocked(8888));
+        System.out.println("Forventet: Konto 3, saldo 800. Konto 4, saldo 700");
+        System.out.println(dao.getKontoLocked(3));
+        System.out.println(dao.getKontoLocked(4));
 
         // Tilbakestill saldoene
-        KontoLocked konto = dao.getKontoLocked(7777);
+        KontoLocked konto = dao.getKontoLocked(3);
         konto.setSaldo(1000);
         dao.oppdaterKontoLocked(konto);
-        konto = dao.getKontoLocked(8888);
+        konto = dao.getKontoLocked(4);
         konto.setSaldo(500);
         dao.oppdaterKontoLocked(konto);
     }

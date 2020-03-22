@@ -2,11 +2,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
+@Entity
 public class KontoLocked {
-    private int version;
+    @Id
     private int kontonr;
     private double saldo;
     private String eier;
+    private int version;
 
     public KontoLocked() {
 
