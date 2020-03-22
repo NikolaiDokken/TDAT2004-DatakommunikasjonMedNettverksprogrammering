@@ -1,0 +1,4 @@
+Optimistisk låsing er en løsning på problemet med at to klienter forsøker p endre en verdi samtidig. Et eksempel er at to klienter leser en saldo og legger til 50kr. Saldoen blir 150kr, men skulle i utgangspunktet blitt 200kr.
+
+Løsningen på dette er optimistisk låsing der man legger til et ekstra felt i databasen som oppdateres hver gang noen skriver til databaseraden. Dermed kan man se om noen har oppdatert raden etter at en klient leste ut verdiene.
+
