@@ -124,7 +124,6 @@ public class KontoDAO {
                     return;
                 }
                 kontoTil.trekk(-belop);
-
                 manager.getTransaction().begin();
                 manager.merge(kontoFra);
                 manager.merge(kontoTil);

@@ -8,6 +8,7 @@ public class KontoLocked {
     private int kontonr;
     private double saldo;
     private String eier;
+    @Version
     private int version;
 
     public KontoLocked() {
