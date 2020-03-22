@@ -7,7 +7,7 @@
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql.stud.iie.ntnu.no:3306/insertDBName"/>
-      <property name="javax.persistence.jdbc.user" value="insertDBName"/>
+      <property name="javax.persistence.jdbc.user" value="insertDBUser"/>
       <property name="javax.persistence.jdbc.password" value="insertDBPass"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>

@@ -4,6 +4,8 @@ import javax.persistence.Persistence;
 public class Klient {
 
     public static void main(String[] args) throws Exception {
+        // Remember to insert DB credentials in persistence.xml
+
         oppgave2();
         oppgave3();
         oppgave4();
