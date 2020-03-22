@@ -5,8 +5,8 @@ public class Klient {
 
     public static void main(String[] args) throws Exception {
         oppgave2();
-        oppgave3();
-        oppgave4();
+        // oppgave3();
+        // oppgave4();
     }
 
     public static void oppgave2() {
