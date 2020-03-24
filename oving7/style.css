@@ -1,0 +1,25 @@
+head,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  margin: 0 auto;
+  margin-top: 10%;
+  text-align: center;
+  width: 50%;
+}
+
+#username-input {
+  width: 25%;
+  margin: 5%;
+}
+
+#message-board {
+  max-height: 250px;
+  overflow-y: scroll;
+  text-align: left;
+  margin: 0 auto;
+  width: 55%;
+}
