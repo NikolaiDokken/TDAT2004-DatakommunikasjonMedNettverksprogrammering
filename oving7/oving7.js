@@ -20,7 +20,7 @@ const httpServer = net.createServer(connection => {
       ws.onmessage = event => {document.getElementById("messages").appendChild(document.createTextNode(event.data))};
       ws.onopen = () => ws.send('hello');
       function sendMsg() {
-        ws.send("A message");
+        ws.send("A message ndfjsfsdhfajhfsdfsdhjffjhasbfsdfjhsdfhbsdfjhsdbfjhsdfbsdjfhbdsjhfbsdfjhbsdjhfbdsjhfbdsjhfbsdjhfsdhjfbsjdhfbjhbskhffdsjgbsdfjhgbsdfjhkbgdjsfhgbdsjhfgbdsfjhgbdsfjhgbdfsjghbdsfjghbjghbdfgjhbdfsgjhsdbgjhdfbgjdhfgbdsjhgbdsfjhgbdfjhbgdf gdfghjbs dghjbsdfghjdsfbgjhfdsgbjdshfgbdsfjhgbdsfjhgbdfsjgbsdjfgbsjdbgjdhsfbgjhsdfbgjhsdfbgjsdhfbgjsdhkfbgjshdfbgjhsdfbgjhdfsbgjhsdfbgdjhsfgbdsjhgbsdfjgjdkfsdkfjfasddfpaghifdhgidfsghsdiugdf fhsdghdgsjdfbgdfhbdsfg dhjbsdgsjdfhbgdsfjhgdfs");
       }
     </script>
   </body>
@@ -63,6 +63,11 @@ const wsServer = net.createServer(connection => {
       let bytes = Buffer.from(data);
       let length = bytes[1] & 127;
       let maskStart = 2;
+      if (length == 126) {
+        maskStart = 4;
+      } else if (length == 127) {
+        maskStart = 10;
+      }
       let dataStart = maskStart + 4;
       let output = "";
       for (let i = dataStart; i < dataStart + length; i++) {
