@@ -1,11 +1,10 @@
 ## To run the online compiler
 
-In the project directory, run:
+In the project directory, run the following commands in separate terminal windows:
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://local
+Runs the app in the development mode.
 
 ### `node server.js`
 
