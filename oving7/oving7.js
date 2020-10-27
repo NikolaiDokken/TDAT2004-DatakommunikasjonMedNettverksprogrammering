@@ -20,7 +20,7 @@ const httpServer = net.createServer(connection => {
       ws.onmessage = event => {document.getElementById("messages").appendChild(document.createTextNode(event.data))};
       ws.onopen = () => ws.send('hello');
       function sendMsg() {
-        ws.send("A message ndfjsfsdhfajhfsdfsdhjffjhasbfsdfjhsdfhbsdfjhsdbfjhsdfbsdjfhbdsjhfbsdfjhbsdjhfbdsjhfbdsjhfbsdjhfsdhjfbsjdhfbjhbskhffdsjgbsdfjhgbsdfjhkbgdjsfhgbdsjhfgbdsfjhgbdsfjhgbdfsjghbdsfjghbjghbdfgjhbdfsgjhsdbgjhdfbgjdhfgbdsjhgbdsfjhgbdfjhbgdf gdfghjbs dghjbsdfghjdsfbgjhfdsgbjdshfgbdsfjhgbdsfjhgbdfsjgbsdjfgbsjdbgjdhsfbgjhsdfbgjhsdfbgjsdhfbgjsdhkfbgjshdfbgjhsdfbgjhdfsbgjhsdfbgdjhsfgbdsjhgbsdfjgjdkfsdkfjfasddfpaghifdhgidfsghsdiugdf fhsdghdgsjdfbgdfhbdsfg dhjbsdgsjdfhbgdsfjhgdfs");
+        ws.send("A message");
       }
     </script>
   </body>
